@@ -29,8 +29,6 @@ repositories {
 dependencies {
 	compileOnly("org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT")
 	compileOnly("com.aystudio.core:AyCore:1.4.2-BETA")
-	compileOnly("me.clip:placeholderapi:2.10.4")
-	compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
     compileOnly("com.aiyostudio.esync:eSync:1.2.0-beta")
 
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
