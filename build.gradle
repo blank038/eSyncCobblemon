@@ -1,0 +1,69 @@
+plugins {
+	id "org.jetbrains.kotlin.jvm" version "2.2.10"
+	id 'com.gradleup.shadow' version "8.3.+"
+	id "architectury-plugin" version "3.4-SNAPSHOT"
+	id "dev.architectury.loom" version "1.10-SNAPSHOT"
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+architectury {
+	minecraft = '1.21.1'
+}
+
+repositories {
+	maven {
+		name = "AiYo Studio Repository"
+		url = uri("https://repo.mc9y.com/snapshots")
+	}
+	maven {
+		url = uri("https://maven.impactdev.net/repository/development/")
+	}
+}
+
+dependencies {
+	compileOnly("org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT")
+	compileOnly("com.aystudio.core:AyCore:1.4.2-BETA")
+	compileOnly("me.clip:placeholderapi:2.10.4")
+	compileOnly("de.tr7zw:item-nbt-api-plugin:2.12.2")
+    compileOnly("com.aiyostudio.esync:eSync:1.2.0-beta")
+
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings(loom.officialMojangMappings())
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+
+	modApi(fileTree("libs/mods") { include("*.jar") })
+	modApi("com.cobblemon:fabric:1.7.1+1.21.1-SNAPSHOT")
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("plugin.yml") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+	kotlinOptions {
+		jvmTarget = 21
+	}
+}
+
+java {
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}

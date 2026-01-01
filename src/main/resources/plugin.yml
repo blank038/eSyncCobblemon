@@ -1,0 +1,7 @@
+name: eSyncCobblemon
+main: com.aiyostudio.esynccobblemon.EfficientSyncCobblemon
+version: ${version}
+depend:
+  - AyCore
+  - eSync
+api-version: '1.21'
