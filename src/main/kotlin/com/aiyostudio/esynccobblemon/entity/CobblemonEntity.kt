@@ -19,12 +19,14 @@ class CobblemonEntity : IEntity {
         val partyStorage = Cobblemon.storage.getParty(player, registryAccess)
         val pcStorage = Cobblemon.storage.getPC(player, registryAccess)
 
+        // 清理 PC 盒子列表, 避免加载 NBT 数据导致冲突
+        pcStorage.boxes.clear()
+
         partyStorage.loadFromNBT(partyCompound, registryAccess)
         pcStorage.loadFromNBT(pcCompound, registryAccess)
 
         partyStorage.initialize()
         pcStorage.initialize()
-
 
         player.getPlayer()?.let(Cobblemon.storage::onPlayerDataSync)
         return true
