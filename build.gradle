@@ -28,8 +28,7 @@ repositories {
 
 dependencies {
 	compileOnly("org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT")
-	compileOnly("com.aystudio.core:AyCore:1.4.2-BETA")
-    compileOnly("com.aiyostudio.esync:eSync:1.3.0-beta")
+	compileOnly("com.aystudio.core:AyCore:1.4.5-BETA")
 
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings(loom.officialMojangMappings())
@@ -38,7 +37,8 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
 	modApi(fileTree("libs/mods") { include("*.jar") })
-	modApi("com.cobblemon:fabric:1.7.1+1.21.1-SNAPSHOT")
+	modApi("com.cobblemon:fabric:1.8.0+1.21.1-SNAPSHOT")
+    compileOnly(fileTree(dir: "${projectDir}/ilb", includes: ["*.jar"]))
 }
 
 processResources {

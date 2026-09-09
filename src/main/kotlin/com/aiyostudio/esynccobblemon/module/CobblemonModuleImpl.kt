@@ -11,11 +11,10 @@ import net.minecraft.nbt.TagParser
 import java.util.*
 
 class CobblemonModuleImpl : AbstractModule<CobblemonEntity>() {
-    override val uniqueKey: String = "cobblemon"
 
     init {
         if (EfficientSyncCobblemon.instance.config.getBoolean("depend")) {
-            CacheHandler.dependModules.add(uniqueKey)
+            CacheHandler.INSTANCE.dependModules.add(uniqueKey)
         }
     }
 
@@ -30,6 +29,10 @@ class CobblemonModuleImpl : AbstractModule<CobblemonEntity>() {
 
     override fun attemptLoad(uuid: UUID, bytea: ByteArray?): Boolean {
         return firstLoad(uuid, bytea)
+    }
+
+    override fun getUniqueKey(): String {
+        return "cobblemon"
     }
 
     override fun preLoad(uuid: UUID) {
